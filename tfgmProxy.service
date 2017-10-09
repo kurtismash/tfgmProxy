@@ -1,0 +1,11 @@
+[Unit]
+Description=A simple proxy to create a JSON API from the TFGM website.
+
+[Service]
+Environment=
+WorkingDirectory=/home/tfgm/tfgmProxy/
+ExecStart=/home/tfgm/tfgmProxy/venv/bin/python /home/tfgm/tfgmProxy/tfgmProxy.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
