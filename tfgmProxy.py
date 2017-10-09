@@ -15,7 +15,7 @@ config = {
 app = Flask(__name__)
 
 #Tram departures:
-@app.route('/departures.json')
+@app.route('/tram/departures.json')
 def departures():
 	location = request.args.get('location') or config['defaultTramStop']
 	departures = []
@@ -49,7 +49,7 @@ def departures():
 	return jsonify(departures)
 
 #Tram stations:
-@app.route('/tramstops.json')
+@app.route('/tram/stops.json')
 def tramstops():
 	tramstops = []
 	page = requests.get('%s/public-transport/tram/stops' % config['url'])
