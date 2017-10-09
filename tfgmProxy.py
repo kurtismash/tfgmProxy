@@ -14,6 +14,7 @@ config = {
 
 app = Flask(__name__)
 
+#Tram departures:
 @app.route('/departures.json')
 def departures():
 	location = request.args.get('location') or config['defaultTramStop']
@@ -46,6 +47,21 @@ def departures():
 			'departs' : departs
 			})
 	return jsonify(departures)
+
+#Tram stations:
+@app.route('/tramstops.json')
+def tramstops():
+	tramstops = []
+	page = requests.get('%s/public-transport/tram/stops' % config['url'])
+	soup = BeautifulSoup(page.content, 'html.parser')
+	stops = soup.find_all(class_='result-button')
+	for stop in stops:
+		stop = stop.contents[1].contents[0]
+		stop = stop.lower()
+		stop = stop.replace(' ', '-')
+		stop = stop[:-10]
+		tramstops.append(stop)
+	return jsonify(tramstops)
 
 #Configure and serve webserver
 if __name__ == '__main__':
