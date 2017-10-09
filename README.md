@@ -1,7 +1,7 @@
 tfgmProxy
 ========
 
-A flask app that scrapes html from TFGM to provide a JSON API.
+A flask app that scrapes html from Travel For Greater Manchester to provide a JSON API.
 
 **tfgmProxy configuration**
 1. Configure tfgmProxy.py options as per your setup and neeeds.
@@ -22,5 +22,5 @@ $ sudo systemctl start tfgmProxy.service
 
 **Using the JSON API**
 The API can now be accessed at the IP address ad port you've specified in `tfgmProxy.py`.
-Currently, the following calls are implemented:
+Currently, the following calls are implemented (Only tram data is availible at the moment):
 * /departures.json (Location can be altered by trailing with ?location=...)
