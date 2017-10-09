@@ -8,7 +8,8 @@ from bs4 import BeautifulSoup
 config = {
 	'defaultTramStop' : 'mediacityuk',
 	'bindAddr' : 'localhost',
-	'bindPort' : '5004'	
+	'bindPort' : '5004',
+	'url' : 'https://beta.tfgm.com'
 }
 
 app = Flask(__name__)
@@ -17,7 +18,7 @@ app = Flask(__name__)
 def departures():
 	location = request.args.get('location') or config['defaultTramStop']
 	departures = []
-	page = requests.get('https://beta.tfgm.com/public-transport/tram/stops/%s-tram' % location)
+	page = requests.get('%s/public-transport/tram/stops/%s-tram' %(config['url'],location))
 	soup = BeautifulSoup(page.content, 'html.parser')
 	htmlTrams = soup.find_all(class_='tram')
 	if len(htmlTrams) == 0:
