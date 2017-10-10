@@ -6,7 +6,6 @@ from flask import Flask, Response, request, jsonify, abort, render_template
 from bs4 import BeautifulSoup
 
 config = {
-	'defaultTramStop' : 'mediacityuk',
 	'bindAddr' : 'localhost',
 	'bindPort' : '5004',
 	'url' : 'https://beta.tfgm.com'
@@ -15,9 +14,8 @@ config = {
 app = Flask(__name__)
 
 #Tram departures:
-@app.route('/tram/departures.json')
-def departures():
-	location = request.args.get('location') or config['defaultTramStop']
+@app.route('/tram/<location>/departures.json')
+def departures(location):
 	departures = []
 	page = requests.get('%s/public-transport/tram/stops/%s-tram' %(config['url'],location))
 	soup = BeautifulSoup(page.content, 'html.parser')
