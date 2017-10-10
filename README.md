@@ -23,5 +23,5 @@ $ sudo systemctl start tfgmProxy.service
 ## Using the JSON API
 The API can now be accessed at the IP address and port you've specified in `tfgmProxy.py`.
 Currently, the following calls are implemented (Only tram data is available at the moment):
-* /tram/<location>/departures.json
+* /tram/[location]/departures.json
 * /tram/stops.json
