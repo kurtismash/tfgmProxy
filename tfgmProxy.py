@@ -59,6 +59,7 @@ def tramstops():
 		stop = stop.contents[1].contents[0]
 		stop = stop.lower()
 		stop = stop.replace(' ', '-')
+		stop = stop.replace('\'', '')
 		stop = stop[:-10]
 		tramstops.append(stop)
 	return jsonify(tramstops)
@@ -67,4 +68,3 @@ def tramstops():
 if __name__ == '__main__':
     http = WSGIServer((config['bindAddr'], int(config['bindPort'])), app.wsgi_app)
     http.serve_forever()
-
