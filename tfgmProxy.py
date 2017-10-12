@@ -62,6 +62,7 @@ def tramstops():
 		tramstops.append(stop)
 	return jsonify(tramstops)
 
+#Bus departures:
 @app.route('/bus/<location>/departures.json')
 def busDepartures(location):
 	departures = []
@@ -111,8 +112,6 @@ def busDepartures(location):
 				palmOperator = ''
 
 
-
-
 			departures.append({
 				'departureDestination' : departureDestination,
 				'departureRoute' : departureRoute,
@@ -125,6 +124,23 @@ def busDepartures(location):
 
 			})
 	return jsonify(departures)
+
+#Bus stations:
+@app.route('/bus/stations.json')
+def busstops():
+	busstops = []
+	page = requests.get('%s/public-transport/bus/stations' % config['url'])
+	soup = BeautifulSoup(page.content, 'html.parser')
+	stops = soup.find_all(class_='result-button')
+	for stop in stops:
+		stop = stop.contents[1].contents[0]
+		stop = stop.lower()
+		stop = stop.replace(' ', '-')
+		stop = stop.replace('\'', '')
+		stop = stop.replace('-bus-station', '')
+		stop = stop.replace('-coach-station','')
+		busstops.append(stop)
+	return jsonify(busstops)
 
 #Configure and serve webserver
 if __name__ == '__main__':
