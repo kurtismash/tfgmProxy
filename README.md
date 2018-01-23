@@ -1,5 +1,8 @@
-tfgmProxy
+DEPRECIATED
 ========
+This has been depreciated as TFGM now provide an API for this, see https://developer.tfgm.com.
+
+## tfgmProxy
 
 A flask app that scrapes html from Travel For Greater Manchester to provide a JSON API.
 
